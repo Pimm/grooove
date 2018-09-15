@@ -106,7 +106,7 @@ const edgesRadiusOvershoot = 1.89230 /* calculateTensionOvershoot(.12) */;
  * @param {!Object=} options
  */
 goog.global[exportProperty] = function startGrooove(width, height, root, options) {
-	const {color, ariaValueText} = normalizeOptions(options);
+	const {c0lor, ariaValueText} = normalizeOptions(options);
 	// Create the <canvas /> element and get the context.
 	const canvasElement = createCanvasElement(width, height);
 	const context = get2dRenderingContext(canvasElement);
@@ -119,7 +119,7 @@ goog.global[exportProperty] = function startGrooove(width, height, root, options
 	// element.
 	context.circle = drawCircle;
 	// Create a function we can use to create the fill styles which already has the colour bound.
-	const composeFillStyle = composeCssColor.bind(undefined, color[0], color[1], color[2]);
+	const composeFillStyle = composeCssColor.bind(undefined, c0lor[0], c0lor[1], c0lor[2]);
 	//                                                        ↑ This can be written as ...options.color. However, that
 	//                                                          would cause Closure Compiler to include a bulky polyfill
 	//                                                          when targeting "ECMASCRIPT5".
