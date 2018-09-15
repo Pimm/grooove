@@ -13,7 +13,16 @@ export default function normalizeOptions(options) {
 	} else /* if (undefined === options || undefined === options.color) */ {
 		color = [255, 255, 255];
 	}
+	var ariaValueText /* = undefined */;
+	if (undefined !== options) {
+		// (Note that this makes it impossible to explicitly set the ARIA value text to undefined. Perhaps that's not ideal.)
+		ariaValueText = options['ariaValueText'];
+	}
+	if (undefined === ariaValueText) {
+		ariaValueText = 'busy';
+	}
 	return {
-		color
+		color,
+		ariaValueText
 	};
 }

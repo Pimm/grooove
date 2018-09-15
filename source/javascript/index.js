@@ -106,10 +106,14 @@ const edgesRadiusOvershoot = 1.89230 /* calculateTensionOvershoot(.12) */;
  * @param {!Object=} options
  */
 goog.global[exportProperty] = function startGrooove(width, height, root, options) {
-	const {color} = normalizeOptions(options);
+	const {color, ariaValueText} = normalizeOptions(options);
 	// Create the <canvas /> element and get the context.
 	const canvasElement = createCanvasElement(width, height);
 	const context = get2dRenderingContext(canvasElement);
+	// For users of assistive technologies, set the role and "value" of the <canvas /> element. (See
+	// https://www.w3.org/TR/wai-aria-1.1/#progressbar.)
+	canvasElement.setAttribute('role', 'progressbar');
+	canvasElement.setAttribute('aria-valuetext', ariaValueText);
 	// Inject the circle function into the context. This is… pretty safe. We're not modifying the prototype. For someone
 	// to accidentally use or overwrite this function, they would have to call getContext on our "private" <canvas />
 	// element.
