@@ -1,0 +1,14 @@
+{
+  "name": "grooove",
+  "version": "1.0.0",
+  "description": "Grooovy busy indicator.",
+  "main": "library/index.js",
+  "scripts": {
+    "build": "closure-compiler --js node_modules/google-closure-library/closure/goog/base.js --js source/javascript/index.js --js source/javascript/normalizeOptions --js source/javascript/createSingleUseGate --js source/javascript/interpolation --compilation_level ADVANCED --language_out ECMASCRIPT5_STRICT --use_types_for_optimization --assume_function_wrapper --js_output_file library/index.js --output_wrapper \"%output%module.exports=this.e;\"",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "license": "X11",
+  "dependencies": {
+    "google-closure-library": "^20180805.0.0"
+  }
+}
