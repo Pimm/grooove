@@ -120,9 +120,9 @@ goog.global[exportProperty] = function startGrooove(width, height, root, options
 	context.circle = drawCircle;
 	// Create a function we can use to create the fill styles which already has the colour bound.
 	const composeFillStyle = composeCssColor.bind(undefined, c0lor[0], c0lor[1], c0lor[2]);
-	//                                                        ↑ This can be written as ...options.color. However, that
-	//                                                          would cause Closure Compiler to include a bulky polyfill
-	//                                                          when targeting "ECMASCRIPT5".
+	//                                                        ↑ This can be written as ...c0lor. However, that would
+	//                                                          cause Closure Compiler to include a bulky polyfill when
+	//                                                          targeting "ECMASCRIPT5".
 	// 
 	// Calculate the playing field.
 	const maximalRadius = height * .5;
@@ -208,7 +208,8 @@ goog.global[exportProperty] = function startGrooove(width, height, root, options
 					alpha *= 1 - (2 * (edgePosition - .5));
 				}
 			}
-			// TODO Document
+			// If a new path has not begun or this circle has a different alpha from the one(s) in the current path, fill
+			// (drawing the circles added to the current path onto the canvas) and begin a new path.
 			if (currentPathAlpha != alpha) {
 				if (undefined !== currentPathAlpha) {
 					context.fill();
@@ -219,6 +220,7 @@ goog.global[exportProperty] = function startGrooove(width, height, root, options
 			}
 			context.circle(x + maximalRadius * xDisplacement, maximalRadius, maximalRadius * radiusMultiplier);
 		}
+		// Fill (drawing the circles added to the last path onto the canvas).
 		context.fill();
 		animationFrameRequestIdentifier = window.requestAnimationFrame(draw);
 	}
